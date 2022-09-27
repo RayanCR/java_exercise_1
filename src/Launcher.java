@@ -70,6 +70,8 @@ public class Launcher
 				i++;
 			}
 
+			System.out.println(dic_tree);
+
 		}
 		catch (Exception e)
 		{
@@ -78,45 +80,95 @@ public class Launcher
 		return "the lorem of";
 	}
 	
+	public interface Commande
+	{
+		String name();
+		boolean run(Scanner scanne);
+	}
+
+
+
+	public static class Quit implements Commande
+	{
+		String name {
+
+			return "QUIT".toLowerCase();
+		}
+
+		boolean run(Scanner arg){
+			return true;
+		}
+	}
+
+
+	public static class Fibo implements Commande
+	{
+		String name {
+
+			return "FIBO".toLowerCase();
+		}
+
+		boolean run(Scanner arg){
+			fibo(arg);
+			return false;
+		}
+	}
+
+	public static class Freq implements Commande
+	{
+		String name {
+
+			return "FREQ".toLowerCase();
+		}
+
+		boolean run(Scanner arg){
+			freq(arg);
+			return false;
+		}
+	}
 
 	public static void main(String[] args)
 	{
+		System.out.println("Bienvenue");
+
+		List<Commande> tab = new arrayList <Commande>();
+
+		tab.add(new Quit());
+		tab.add(new Fibo());
+		tab.add(new Freq());
+
+
 		
-		System.out.println("Bienvenue");	
-		
-		var scanner = new Scanner(System.in);
+		var scanner = new Scanner (System.in);
 
-		String input = scanner.nextLine();
+		var input = "";
 
-		int val;
+		int i;
 
-		Path filePath;
+		boolean stop = false, uc = false;
 
+		// Path filePath;
 
-		while (!"quit".equals(input))
+		while (stop == false)
 		{
-			if ("fibo".equals(input))
-			{
-				System.out.print("Entree un nombre : ");
-				val = scanner.nextInt();
-				input = scanner.nextLine();
-				System.out.println("Fibo de " + val + " est egale a : " + fibo(val));
-			}
-			else if ("freq".equals(input))
-			{
-				System.out.print("Entree le file path : ");
+			input = scanner.nextLine();
 
-				filePath = Paths.get(scanner.nextLine());
+			uc = false;
 
-				System.out.println(freq(filePath));
-				
+			for (i=0; i<tab.size(); i++)
+			{
+				if (Objects.equals(input,tab.get(i).name().toLowerCase()))
+				{
+					stop = tab.get(i).run(scanner);
+					uc = true;
+				}
 			}
-			else
+
+			if (uc == false)
 			{
 				System.out.println("unknown command");
 			}
 
-			input = scanner.nextLine();
 		}
 		
 	}

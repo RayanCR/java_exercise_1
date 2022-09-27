@@ -127,49 +127,37 @@ public class Launcher
 		}
 	}
 
-	public static void main(String[] args)
-	{
-		System.out.println("Bienvenue");
+	System.out.println("Welcome to Gorfouland :");
 
-		List<Commande> tab = new arrayList <Commande>();
+        List<Command> cmd_list = new ArrayList<Command> ();
+        cmd_list.add(new Quit());
+        cmd_list.add(new Fibo());
+        cmd_list.add(new Freq());
+        cmd_list.add(new Predict());
 
-		tab.add(new Quit());
-		tab.add(new Fibo());
-		tab.add(new Freq());
+        boolean stop = false;
+        boolean found = false;
 
+        var scanner = new Scanner(System.in);
+        var input = "";
 
-		
-		var scanner = new Scanner (System.in);
+        do {
+            input = scanner.nextLine();
+            found = false;
 
-		var input = "";
+            for(int i = 0; i < cmd_list.size() ; i++){
 
-		int i;
+                if(Objects.equals(input, cmd_list.get(i).name().toLowerCase())){
 
-		boolean stop = false, uc = false;
+                    stop = cmd_list.get(i).run(scanner);
+                    found = true;
 
-		// Path filePath;
+                }
+            }
+            if (found == false){
+                System.out.println("Unknown command");
+            }
 
-		while (stop == false)
-		{
-			input = scanner.nextLine();
+        }while (stop == false);
 
-			uc = false;
-
-			for (i=0; i<tab.size(); i++)
-			{
-				if (Objects.equals(input,tab.get(i).name().toLowerCase()))
-				{
-					stop = tab.get(i).run(scanner);
-					uc = true;
-				}
-			}
-
-			if (uc == false)
-			{
-				System.out.println("unknown command");
-			}
-
-		}
-		
-	}
 }

@@ -3,7 +3,7 @@ import java.util.*;
 abstract class Freq implements Command {
     public String name () {return "freq";}
     public Boolean run(Scanner scanner){
-        System.out.println("Entrez le path du fichier que vous voulez traiter (connaitre les 3 mots les plus courants) : ");
+        System.out.println("Entrez le path d'un fichier : ");
         Scanner sc = new Scanner(System.in);
         String inpf = (sc.nextLine());
         try {

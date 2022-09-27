@@ -75,7 +75,7 @@ public class Launcher
 		{
 			System.out.println("Unreadable file: " + e);
 		}
-		return content;
+		return "the lorem of";
 	}
 	
 

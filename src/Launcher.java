@@ -70,8 +70,6 @@ public class Launcher
 				i++;
 			}
 
-			System.out.println(dic_tree);
-
 		}
 		catch (Exception e)
 		{
@@ -80,84 +78,46 @@ public class Launcher
 		return "the lorem of";
 	}
 	
-	public interface Commande
+
+	public static void main(String[] args)
 	{
-		String name();
-		boolean run(Scanner scanne);
+		
+		System.out.println("Bienvenue");	
+		
+		var scanner = new Scanner(System.in);
+
+		String input = scanner.nextLine();
+
+		int val;
+
+		Path filePath;
+
+
+		while (!"quit".equals(input))
+		{
+			if ("fibo".equals(input))
+			{
+				System.out.print("Entree un nombre : ");
+				val = scanner.nextInt();
+				input = scanner.nextLine();
+				System.out.println("Fibo de " + val + " est egale a : " + fibo(val));
+			}
+			else if ("freq".equals(input))
+			{
+				System.out.print("Entree le file path : ");
+
+				filePath = Paths.get(scanner.nextLine());
+
+				System.out.println(freq(filePath));
+				
+			}
+			else
+			{
+				System.out.println("unknown command");
+			}
+
+			input = scanner.nextLine();
+		}
+		
 	}
-
-
-
-	public static class Quit implements Commande
-	{
-		String name {
-
-			return "QUIT".toLowerCase();
-		}
-
-		boolean run(Scanner arg){
-			return true;
-		}
-	}
-
-
-	public static class Fibo implements Commande
-	{
-		String name {
-
-			return "FIBO".toLowerCase();
-		}
-
-		boolean run(Scanner arg){
-			fibo(arg);
-			return false;
-		}
-	}
-
-	public static class Freq implements Commande
-	{
-		String name {
-
-			return "FREQ".toLowerCase();
-		}
-
-		boolean run(Scanner arg){
-			freq(arg);
-			return false;
-		}
-	}
-
-	System.out.println("Welcome to Gorfouland :");
-
-        List<Command> cmd_list = new ArrayList<Command> ();
-        cmd_list.add(new Quit());
-        cmd_list.add(new Fibo());
-        cmd_list.add(new Freq());
-        cmd_list.add(new Predict());
-
-        boolean stop = false;
-        boolean found = false;
-
-        var scanner = new Scanner(System.in);
-        var input = "";
-
-        do {
-            input = scanner.nextLine();
-            found = false;
-
-            for(int i = 0; i < cmd_list.size() ; i++){
-
-                if(Objects.equals(input, cmd_list.get(i).name().toLowerCase())){
-
-                    stop = cmd_list.get(i).run(scanner);
-                    found = true;
-
-                }
-            }
-            if (found == false){
-                System.out.println("Unknown command");
-            }
-
-        }while (stop == false);
-
 }

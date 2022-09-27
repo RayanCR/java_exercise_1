@@ -8,7 +8,7 @@ public class Launcher {
             command.add(new Freq(){});
             command.add(new Predict(){});
 
-            System.out.println("Bienvenue sur le Launcher !");
+            System.out.println("Bienvenue ");
             Scanner sc = new Scanner(System.in);
             while (true) {
                 String inp = sc.nextLine();
@@ -16,7 +16,6 @@ public class Launcher {
                 for (Command value : command) {
                     if (value.name().equals(inp)) {
                         if (value.run(sc)) {
-                            System.out.println("Bonne journée");
                             return;
                         }else {
                             u++;
